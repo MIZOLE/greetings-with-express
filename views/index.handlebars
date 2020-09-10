@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="head">
+
+        <h1>Greeting</h1>
+    </div>
+
+    <div>
+        {{greet}}
+    </div>
+
+
+
+    <form action="/greeted" method="POST">
+
+        <div class="name">
+            <span class="label-body">Name</span>
+            <input class="greeted people" type="text" name="greeted" value="" placeholder="enter your name">
+        </div>
+
+
+        <label class="">
+            <input type="radio" name="language" value="isiXhosa" class="lang1">
+            <span class="label-body">isiXhosa</span>
+        </label>
+
+        <label class="">
+            <input type="radio" name="language" value="English" class="lang2" >
+            <span class="label-body">English</span>
+        </label>
+
+        <label class="">
+            <input type="radio" name="language" value="isiZulu" class="lang3">
+            <span class="label-body">isiZulu</span>
+        </label>
+        <hr>
+
+        <button class="button-primary" type="submit" name="button">Greet me</button>
+    <div class="counter" name="counted" >
+        {{count}}
+    </div>
+    </form>
+</div>
