@@ -20,14 +20,13 @@ module.exports = function greet() {
         }
     }
     function addNames(name) {
-if(name){
-    
+        if (name) {
 
-        if (names[name] === undefined) {
-            names[name] = 0;
+            if (names[name] === undefined) {
+                names[name] = 0;
+            }
+            names[name]++
         }
-        names[name]++
-    }
     }
     function countAll() {
         return Object.keys(names).length
@@ -36,17 +35,6 @@ if(name){
     function greeted() {
         return names;
     }
-    function count() {
-        for (const key in names) {
-            if (names.addNames(key)) {
-                const element = names[key];
-
-            }
-        }
-    }
-
-
-
 
     return {
         greeter,

@@ -41,15 +41,14 @@ app.get('/greeted', function (req, res) {
 
 app.get('/counter/:username', function (req, res) {
 
-    var username = req.params.username;
+    var personsName = req.params.username;
+    var namesGreeted = greet.greeted()
 
-    addNames(username)
-
-    var name = greet.greeted()
-
-    // console.log(name[username])
-    // var msg = "HI" + ;
-    res.render('names', {name: greet.addNames(username) });
+    var msg = "Hello, " + personsName + " has been greeted " + namesGreeted[personsName] + " times."
+   console.log(namesGreeted[personsName])
+    res.render('name', {
+      message : msg
+    });
 })
 
 app.post('/counter', function (req, res) {
