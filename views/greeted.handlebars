@@ -1,0 +1,15 @@
+<div class="row">
+    <h3>Greeted People</h3>
+   
+    <h5>Names of the People</h5>
+
+ <ul>
+        {{#each names}}
+        <li>
+            <a href="/greeted/{{this}}">{{@key}}</a>
+        </li>
+
+        
+         {{/each}}
+    </ul>
+</div>

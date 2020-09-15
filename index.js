@@ -22,22 +22,30 @@ app.get('/', function (req, res) {
 
     });
 });
-
-app.post('/greeted', function (req, res) {
+app.post('/greet', function (req, res) {
 
     let firstName = req.body.greeted;
     let languages = req.body.language;
 
-    res.render("index", { greet: greet.greeter(firstName, languages),  count: greet.countAll()})
+    res.render("index", { greet: greet.greeter(firstName, languages), count: greet.countAll() })  
 })
 
-app.post('/counter/Lulama', function (req, res) {
+app.get('/greeted', function (req, res) {
 
+    let firstName = req.body.greeted;
+    let languages = req.body.language;
 
+    res.render("greeted", { names: greet.greeted() })  
+})
+
+app.get('/counter/:username', function (req, res) {
+
+    
+    res.render('index', {names: greet.countAll()});
 })
 
 app.post('/counter', function (req, res) {
-
+    
     let count = req.body.counted;
     res.render("index", { greet: greet.countAll(count) })
 })

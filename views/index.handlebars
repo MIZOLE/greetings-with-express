@@ -10,7 +10,7 @@
 
 
 
-    <form action="/greeted" method="POST">
+    <form action="/greet" method="POST">
 
         <div class="name">
             <span class="label-body">Name</span>
@@ -24,7 +24,7 @@
         </label>
 
         <label class="">
-            <input type="radio" name="language" value="English" class="lang2" >
+            <input type="radio" name="language" value="English" class="lang2">
             <span class="label-body">English</span>
         </label>
 
@@ -35,8 +35,16 @@
         <hr>
 
         <button class="button-primary" type="submit" name="button">Greet me</button>
-    <div class="counter" name="counted" >
-        {{count}}
-    </div>
+        <div class="counter" name="counted">
+            {{count}}
+        </div>
+        <hr>
+        {{!-- <div action="/counter/:username" name="lulama" class="greeted-route" >
+        {{names}}
+    </div> --}}
+        
     </form>
+    <a href="/greeted">
+            <button class="button-primary" type="submit" name="button">Link me</button>
+        </a>
 </div>

@@ -9,14 +9,14 @@ module.exports = function greet() {
         addNames(name)
 
         if (language === "isiXhosa") {
-            return "Molo"+", " + name
+            return "Molo" + ", " + name
         }
         if (language === "English") {
-            return "Hello"+", " + name
+            return "Hello" + ", " + name
         }
 
         if (language === "isiZulu") {
-            return "Sawubona"+", " + name
+            return "Sawubona" + ", " + name
         }
     }
     function addNames(name) {
@@ -32,9 +32,19 @@ module.exports = function greet() {
         return Object.keys(names).length
     }
 
+    function greeted() {
+    return names;
+
+    }
+
+   
+
+
+
     return {
         greeter,
         addNames,
-        countAll
+        countAll,
+        greeted
     }
 }
