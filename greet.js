@@ -20,24 +20,31 @@ module.exports = function greet() {
         }
     }
     function addNames(name) {
+if(name){
+    
 
         if (names[name] === undefined) {
             names[name] = 0;
         }
         names[name]++
-        console.log(names)
     }
-
+    }
     function countAll() {
         return Object.keys(names).length
     }
 
     function greeted() {
-    return names;
+        return names;
+    }
+    function count() {
+        for (const key in names) {
+            if (names.addNames(key)) {
+                const element = names[key];
 
+            }
+        }
     }
 
-   
 
 
 
