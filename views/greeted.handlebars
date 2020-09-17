@@ -1,13 +1,19 @@
 <div class="row">
     <h3>Greeted People</h3>
-   
-    <h5>Names of the People</h5>
 
- <ul>
+    <h5>Names of the People</h5>
+    <hr>
+    <ul>
         {{#each names}}
         <li>
             <a href="/counter/{{@key}}">{{@key}}</a>
         </li>
-         {{/each}}
+        {{/each}}
     </ul>
+
+    {{#if messages.info}}
+    <div class="entry">
+        <h1> {{messages.info}}</h1>
+    </div>
+    {{/if}}
 </div>

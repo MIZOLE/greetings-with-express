@@ -14,11 +14,19 @@
 }
 
 .head {
+  font-style: italic;
+  font: small-caps;
   color: crimson;
   font-weight: bold;
   border-radius: 3ch, solid;
+  border: lime, solid;
+
 }
 
+.entry {
+  color: blue;
+  border: darkslategrey, solid;
+}
 .counter {
 
   border-radius: 0.1em;
@@ -28,6 +36,10 @@
   width: 7em;
   height: 3em;
 
+}
+
+.container {
+  background-color: silver;
 }
 
 .greeted-route {

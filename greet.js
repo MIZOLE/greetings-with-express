@@ -3,9 +3,10 @@ module.exports = function greet() {
     var names = {}
 
     function greeter(name, language) {
-        if (!name) {
-            return "no name entered";
-        }
+        // if (!name) {
+        //     return "no name entered";
+        // }
+        
         addNames(name)
 
         if (language === "isiXhosa") {
@@ -16,7 +17,7 @@ module.exports = function greet() {
         }
 
         if (language === "isiZulu") {
-            return "Sawubona" + ", " + name
+            return "Saw'bona" + ", " + name
         }
     }
     function addNames(name) {
