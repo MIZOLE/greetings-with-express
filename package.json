@@ -1,7 +1,6 @@
 {
   "name": "greetings-webapp",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
@@ -11,8 +10,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
     "pg": "^8.4.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MIZOLE/greetings-with-express.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MIZOLE/greetings-with-express/issues"
+  },
+  "homepage": "https://github.com/MIZOLE/greetings-with-express#readme",
+  "description": ""
 }
