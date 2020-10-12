@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express-flash": "0.0.2",
-    "express-session": "^1.17.1"
+    "express-session": "^1.17.1",
+    "pg": "^8.4.1"
   }
 }

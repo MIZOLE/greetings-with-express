@@ -11,6 +11,7 @@
   color: orange;
   font-weight: bold;
   background-color: rgb(31, 75, 75);
+  
 }
 
 .head {
@@ -20,7 +21,7 @@
   font-weight: bold;
   border-radius: 3ch, solid;
   border: lime, solid;
-
+  size: 2pt;
 }
 
 .entry {
@@ -28,14 +29,12 @@
   border: darkslategrey, solid;
 }
 .counter {
-
   border-radius: 0.1em;
   border: 0.1em solid;
   background-color: black;
   margin: 0.5em;
   width: 7em;
   height: 3em;
-
 }
 
 .container {
@@ -53,9 +52,20 @@
   float: middle;
 }
 
+
+.info {
+  font-size: 1.5em;
+  color: pink;
+}
+
 .body {
   font-weight: bold;
   font-size: 2.5em;
   border: violet;
   background-color: brown;
+}
+
+.greet {
+  font-size: 1.5em;
+  color: beige;
 }

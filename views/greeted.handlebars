@@ -4,16 +4,14 @@
     <h5>Names of the People</h5>
     <hr>
     <ul>
-        {{#each names}}
+        {{#each users}}
         <li>
-            <a href="/counter/{{@key}}">{{@key}}</a>
+            <a href="/counter/{{this.name_greeted}}">{{this.name_greeted}}</a>
         </li>
         {{/each}}
     </ul>
 
-    {{#if messages.info}}
-    <div class="entry">
-        <h1> {{messages.info}}</h1>
-    </div>
-    {{/if}}
+
+    <h1> {{messages.info}}</h1>
+
 </div>

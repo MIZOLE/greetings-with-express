@@ -4,30 +4,30 @@
         <h1>Greeting</h1>
     </div>
 
-    <div>
+    <div class="greet">
         {{greet}}
     </div>
-   
-    <form action="/greet" method="POST">
+
+    <form action="/" method="POST">
 
         <div class="name">
             <span class="label-body">Name</span>
-            <input class="greeted people" type="text" name="greeted" value="" placeholder="enter your name">
+            <input required class="greeted people" type="text" name="name" value="" placeholder="enter your name">
         </div>
 
 
         <label class="">
-            <input type="radio" name="language" value="isiXhosa" class="lang1">
+            <input required type="radio" name="language" value="isiXhosa" class="lang1">
             <span class="label-body">isiXhosa</span>
         </label>
 
         <label class="">
-            <input type="radio" name="language" value="English" class="lang2">
+            <input required type="radio" name="language" value="English" class="lang2">
             <span class="label-body">English</span>
         </label>
 
         <label class="">
-            <input type="radio" name="language" value="isiZulu" class="lang3">
+            <input required type="radio" name="language" value="isiZulu" class="lang3">
             <span class="label-body">isiZulu</span>
         </label>
         <hr>
@@ -40,8 +40,12 @@
         {{!-- <div action="/counter/:username" name="lulama" class="greeted-route" >
         {{names}}
     </div> --}}
+        <div class="info">
+            <h1> {{messages.info}}</h1>
+        </div>
 
     </form>
+
     <a href="/greeted">
         <button class="button-primary" type="submit" name="button">Link me</button>
     </a>

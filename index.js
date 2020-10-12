@@ -3,11 +3,33 @@ const session = require('express-session');
 let express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
-const greetings = require('./greet')
+const Greetings = require('./greet')
+const pg = require("pg");
+const Pool = pg.Pool;
 
-const greet = greetings()
+
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex123:codex123@localhost:5432/user_on';
+
+const pool = new Pool({
+  connectionString,
+  ssl: false
+});
+
+const greet = Greetings(pool)
 let app = express();
+app.use(flash());
 
+app.use(session({
+  secret: "Welcome",
+  resave: false,
+  saveUninitialized: true
+}));
+
+
+app.get('/addFlash', function (req, res) {
+  req.flash('info', 'Flash Message Added');
+  res.redirect('/');
+});
 
 app.engine('handlebars', exphbs({
   layoutsDir: './views/layouts'
@@ -20,71 +42,45 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.get('/', function (req, res) {
+app.get('/', async function (req, res) {
+  const count = await greet.findTotalCounter();
   res.render('index', {
-
+    count
   });
 });
 
 
-app.post('/greet', function (req, res) {
+app.post('/', async (req, res) => {
 
-  let firstName = req.body.greeted;
-  let languages = req.body.language;
+  const { name, language } = req.body;
 
-  if (firstName === "") {
-    return "please enter a name"
-  } else if (languages === undefined) {
-    return "Please enter a language"
-  }
-
-  res.render("index", { greet: greet.greeter(firstName, languages), count: greet.countAll() })
-})
-
-app.get('/greeted', function (req, res) {
-
-  let firstName = req.body.greeted;
-  let languages = req.body.language;
-
-  res.render("greeted", { names: greet.greeted() })
-})
-
-app.get('/counter/:username', function (req, res) {
-
-  var personsName = req.params.username;
-  var namesGreeted = greet.greeted()
-
-  var msg = "Hello, " + personsName + " has been greeted " + namesGreeted[personsName] + " times."
-  console.log(namesGreeted[personsName])
-  res.render('name', {
-    message: msg
-  });
-})
-
-app.post('/counter', function (req, res) {
-  let count = req.body.counted;
-  res.render("index", { greet: greet.countAll(count) })
-})
-
-app.use(session({
-  secret: "Welcome",
-  resave: false,
-  saveUninitialized: true
-}));
-
-app.use(flash());
-
-app.get('/', function (req, res) {
-  req.flash('info', 'Welcome');
+  const greetMessage = await greet.greetWorkflow(name, language); // Molo, Jan
+  const count = await greet.findTotalCounter();
   res.render('index', {
-    title: 'Home'
+    count, greet: greetMessage
+  });
+
+});
+
+
+app.get('/greeted', async (req, res) => {
+  const users = await greet.findUsers();
+  res.render('greeted', {
+    users
   })
-});
+})
 
-app.get('/addFlash', function (req, res) {
-  req.flash('info', 'Flash Message Added');
-  res.redirect('/');
-});
+app.get('/counter/:name', async (req, res) => {
+
+  const name = req.params.name;
+  const counter = await greet.getUserCounterByName(name);
+
+  const user = name + ' have been greeted ' + counter + ' times.'
+  res.render('counter', {
+    user
+  })
+})
+
 
 let PORT = process.env.PORT || 3007;
 app.listen(PORT, function () {
