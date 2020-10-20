@@ -15,6 +15,8 @@ const pool = new Pool({
   ssl: false
 });
 
+
+
 const greet = Greetings(pool)
 let app = express();
 app.use(flash());
@@ -47,15 +49,17 @@ app.get('/', async function (req, res) {
   res.render('index', {
     count
   });
+
 });
 
 
-app.post('/', async (req, res) => {
 
+app.post('/', async (req, res) => {
   const { name, language } = req.body;
 
   const greetMessage = await greet.greetWorkflow(name, language); // Molo, Jan
   const count = await greet.findTotalCounter();
+
   res.render('index', {
     count, greet: greetMessage
   });
@@ -70,12 +74,17 @@ app.get('/greeted', async (req, res) => {
   })
 })
 
+app.get('/reset', async (req, res) => {
+  await greet.resetButton();
+  res.render('index')
+})
+
 app.get('/counter/:name', async (req, res) => {
 
   const name = req.params.name;
   const counter = await greet.getUserCounterByName(name);
 
-  const user = name + ' have been greeted ' + counter + ' times.'
+  const user = name + ' has been greeted ' + counter + ' times.'
   res.render('counter', {
     user
   })

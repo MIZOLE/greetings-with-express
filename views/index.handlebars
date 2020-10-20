@@ -12,27 +12,34 @@
 
         <div class="name">
             <span class="label-body">Name</span>
-            <input required class="greeted people" type="text" name="name" value="" placeholder="enter your name">
+            <input class="greeted people" type="text" name="name" value="" placeholder="enter your name">
         </div>
 
 
         <label class="">
-            <input required type="radio" name="language" value="isiXhosa" class="lang1">
+            <input type="radio" name="language" value="isiXhosa" class="lang1">
             <span class="label-body">isiXhosa</span>
-        </label>
 
-        <label class="">
-            <input required type="radio" name="language" value="English" class="lang2">
+            <input type="radio" name="language" value="English" class="lang2">
             <span class="label-body">English</span>
+
+            <input type="radio" name="language" value="isiZulu" class="lang3">
+            <span class="label-body">isiZulu</span>
         </label>
 
         <label class="">
-            <input required type="radio" name="language" value="isiZulu" class="lang3">
-            <span class="label-body">isiZulu</span>
+
+        </label>
+
+        <label class="">
+
         </label>
         <hr>
 
         <button class="button-primary" type="submit" name="button">Greet me</button>
+        <a href="/reset">
+            <button class="button-primary" type="button" name="button">Reset me</button>
+        </a>
         <div class="counter" name="counted">
             {{count}}
         </div>
@@ -47,6 +54,6 @@
     </form>
 
     <a href="/greeted">
-        <button class="button-primary" type="submit" name="button">Link me</button>
+        <button class="button-primary" type="button" name="button">Greeted people</button>
     </a>
 </div>

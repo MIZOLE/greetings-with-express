@@ -1,48 +1,44 @@
 module.exports = function greet(pool) {
 
     async function checkIfNameExist(name) {
-        const result = await pool.query('select * from greeted where name_greeted = $1 ', [name])
-        
-        return result.rowCount > 0;
+        var cases = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
+        const result = await pool.query('select * from greeted where name_greeted = $1 ', [cases])
+        return result.rowCount;
     }
 
     async function updateUserCounter(name) {
-        await pool.query('update greeted set how_many_times = how_many_times + 1 where name_greeted = $1', [name])
+        var cases = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
+
+        await pool.query('update greeted set how_many_times = how_many_times + 1 where name_greeted = $1', [cases])
     }
 
     async function addNewUserToDatabase(name) {
-        await pool.query('INSERT into greeted(name_greeted, how_many_times) values($1, $2)', [name, 1])
+        var cases = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
 
-    }
+        await pool.query('INSERT into greeted(name_greeted, how_many_times) values($1, $2)', [cases, 1])
+    } 
 
     async function getUserCounterByName(name) {
         const sql = 'select * from greeted where name_greeted = $1;';
 
         const count = await pool.query(sql, [name]);
-        console.log(count.rows[0].how_many_times);
+
+        // console.log(count.rows[0].how_many_times);
 
         return count.rows[0].how_many_times;
-        
     }
-
 
     async function greetWorkflow(name, language) {
         const nameExist = await checkIfNameExist(name); // true or false
 
-        if(nameExist) {
+        if (nameExist) {
             // update counter for that name
             await updateUserCounter(name);
         } else {
             await addNewUserToDatabase(name);
         }
         return getGreetMessage(name, language); // Molo, Jan.
-    } 
-
-    // var names = {}
-
-    /** 
-     * 
-     */
+    }
 
 
     function getGreetMessage(name, language) {
@@ -59,25 +55,24 @@ module.exports = function greet(pool) {
     }
 
     async function findTotalCounter() {
-        const counter = await pool.query('select count(*) from greeted');   
+        const counter = await pool.query('select count(*) from greeted');
         return counter.rows[0].count;
     };
 
     async function findUsers() {
-        const counter = await pool.query('select * from greeted');   
+        const counter = await pool.query('select * from greeted');
         return counter.rows
 
     }
-
-
+    async function resetButton() {
+        const reseting = await pool.query(`delete from greeted`)
+        return reseting;
+    }
     return {
         findTotalCounter,
         greetWorkflow,
         findUsers,
-        getUserCounterByName
-        // greeter,
-        // addNames,
-        // countAll,
-        // greeted
+        getUserCounterByName,
+        resetButton,
     }
 }
