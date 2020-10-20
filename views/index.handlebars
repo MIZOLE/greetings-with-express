@@ -3,11 +3,6 @@
 
         <h1>Greeting</h1>
     </div>
-
-    <div class="greet">
-        {{greet}}
-    </div>
-
     <form action="/" method="POST">
 
         <div class="name">
@@ -15,7 +10,9 @@
             <input class="greeted people" type="text" name="name" value="" placeholder="enter your name">
         </div>
 
-
+        <div class="greet">
+            {{greet}}
+        </div>
         <label class="">
             <input type="radio" name="language" value="isiXhosa" class="lang1">
             <span class="label-body">isiXhosa</span>
@@ -40,7 +37,7 @@
         <a href="/reset">
             <button class="button-primary" type="button" name="button">Reset me</button>
         </a>
-        <div class="counter" name="counted">
+        <div class="" name="counted">
             {{count}}
         </div>
         <hr>

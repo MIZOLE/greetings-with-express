@@ -51,7 +51,7 @@ describe('The user_on database', function () {
 
         var NowManyNames = await counted.findUsers()
 
-        assert.equal(5, NowManyNames.rows.count)
+        assert.equal(0, NowManyNames)
     });
 
     // it('it should be able to get the greet message', async function () {

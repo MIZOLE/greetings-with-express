@@ -6,14 +6,22 @@
   margin-bottom: 1em;
 }
 
+.couned {
+  background-color: khaki;
+}
+
 .row {
   margin: 2em;
   color: orange;
   font-weight: bold;
   background-color: rgb(31, 75, 75);
+  text-align: center;
   
 }
 
+.count {
+  text-align-last: center;
+}
 .head {
   font-style: italic;
   font: small-caps;
@@ -28,7 +36,7 @@
   color: blue;
   border: darkslategrey, solid;
 }
-.counter {
+.counted {
   border-radius: 0.1em;
   border: 0.1em solid;
   background-color: black;
@@ -39,6 +47,7 @@
 
 .container {
   background-color: silver;
+  
 }
 
 .greeted-route {
