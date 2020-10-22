@@ -1,22 +1,27 @@
 module.exports = function greet(pool) {
 
     async function checkIfNameExist(name) {
-        var cases = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
-        const result = await pool.query('select * from greeted where name_greeted = $1 ', [cases])
-        return result.rowCount;
+        if (name) {
+            var cases = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
+            const result = await pool.query('select * from greeted where name_greeted = $1 ', [cases])
+            return result.rowCount;
+        }
     }
 
     async function updateUserCounter(name) {
         var cases = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
 
-        await pool.query('update greeted set how_many_times = how_many_times + 1 where name_greeted = $1', [cases])
+        var updater = await pool.query('update greeted set how_many_times = how_many_times + 1 where name_greeted = $1', [cases])
+        return updater.rowCount
     }
 
     async function addNewUserToDatabase(name) {
-        var cases = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
+        if (name) {
+            var cases = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
 
-        await pool.query('INSERT into greeted(name_greeted, how_many_times) values($1, $2)', [cases, 1])
-    } 
+            await pool.query('INSERT into greeted(name_greeted, how_many_times) values($1, $2)', [cases, 1])
+        }
+    }
 
     async function getUserCounterByName(name) {
         const sql = 'select * from greeted where name_greeted = $1;';
@@ -29,28 +34,29 @@ module.exports = function greet(pool) {
     }
 
     async function greetWorkflow(name, language) {
-        const nameExist = await checkIfNameExist(name); // true or false
-
-        if (nameExist) {
-            // update counter for that name
-            await updateUserCounter(name);
-        } else {
-            await addNewUserToDatabase(name);
+        if (name && language) {
+            const nameExist = await checkIfNameExist(name); // true or false
+            if (nameExist > 0) {
+                // update counter for that name
+                await updateUserCounter(name);
+            } else {
+                await addNewUserToDatabase(name);
+            }
+            // return getGreetMessage(name, language); // Molo, Jan.
         }
-        return getGreetMessage(name, language); // Molo, Jan.
     }
 
-
     function getGreetMessage(name, language) {
+
         if (language === "isiXhosa") {
-            return "Molo" + ", " + name
+            return "Molo, " + name
         }
         if (language === "English") {
-            return "Hello" + ", " + name
+            return "Hello, " + name
         }
 
         if (language === "isiZulu") {
-            return "Saw'bona" + ", " + name
+            return "Sawubona, " + name
         }
     }
 
@@ -74,5 +80,10 @@ module.exports = function greet(pool) {
         findUsers,
         getUserCounterByName,
         resetButton,
+        getGreetMessage,
+        addNewUserToDatabase,
+        checkIfNameExist,
+        updateUserCounter
+
     }
 }

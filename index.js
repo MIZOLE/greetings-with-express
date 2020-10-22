@@ -4,6 +4,7 @@ let express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const Greetings = require('./greet')
+const greetR = require('./routes')
 const pg = require("pg");
 const Pool = pg.Pool;
 
@@ -18,6 +19,7 @@ const pool = new Pool({
 
 
 const greet = Greetings(pool)
+const greetRoutes = greetR(greet)
 let app = express();
 app.use(flash());
 
@@ -44,51 +46,16 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.get('/', async function (req, res) {
-  const count = await greet.findTotalCounter();
-  res.render('index', {
-    count
-  });
-
-});
+app.get('/', greetRoutes.getCount)
 
 
+app.post('/', greetRoutes.workFlowCount)
 
-app.post('/', async (req, res) => {
-  const { name, language } = req.body;
+app.get('/greeted', greetRoutes.getUsers)
 
-  const greetMessage = await greet.greetWorkflow(name, language); // Molo, Jan
-  const count = await greet.findTotalCounter();
+app.get('/reset', greetRoutes.getResetBotton)
 
-  res.render('index', {
-    count, greet: greetMessage
-  });
-
-});
-
-
-app.get('/greeted', async (req, res) => {
-  const users = await greet.findUsers();
-  res.render('greeted', {
-    users
-  })
-})
-
-app.get('/reset', async (req, res) => {
-  await greet.resetButton();
-  res.render('index')
-})
-
-app.get('/counter/:name', async (req, res) => {
-
-  const name = req.params.name;
-  const counter = await greet.getUserCounterByName(name);
-
-  const user = name + ' has been greeted ' + counter + ' times.'
-  res.render('counter', {
-    user
-  })
-})
+app.get('/counter/:name', greetRoutes.getUserCounter)
 
 
 let PORT = process.env.PORT || 3007;

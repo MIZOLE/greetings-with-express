@@ -34,37 +34,103 @@ describe('The user_on database', function () {
         assert.equal(names.rows)
     });
 
-    it('it should be able to count all the names was greeted', async function () {
+    it('it should be able to delete all the user from the data base', async function () {
 
         let counted = greeted(pool)
 
-        await counted.findTotalCounter('Linda')
-        await counted.findTotalCounter('Amila')
-        await counted.findTotalCounter('John vuli gate')
-        await counted.findTotalCounter('John vuli gate')
-        await counted.findTotalCounter('John vuli gate')
-        await counted.findTotalCounter('Zuko')
-        await counted.findTotalCounter('Akhona')
-        await counted.findTotalCounter('Akhona')
-        await counted.findTotalCounter('Akhona')
-        await counted.findTotalCounter('Akhona')
+        await counted.resetButton('Linda')
+        await counted.resetButton('Amila')
+        await counted.resetButton('John vuli gate')
+        await counted.resetButton('John vuli gate')
+        await counted.resetButton('John vuli gate')
+        await counted.resetButton('Zuko')
+        await counted.resetButton('Akhona')
+        await counted.resetButton('Akhona')
+        await counted.resetButton('Akhona')
+        await counted.resetButton('Akhona')
 
-        var NowManyNames = await counted.findUsers()
+        var DeletedNames = await counted.findTotalCounter()
 
-        assert.equal(0, NowManyNames)
+        assert.equal(0, DeletedNames)
     });
 
-    // it('it should be able to get the greet message', async function () {
-    //     let message = greeted(pool)
+    it('it should be able to add new user to the data base', async function () {
+        let HowManyAdded = greeted(pool)
 
-    //     await message.getGreetMessage('isiXhosa')
-    //     await message.getGreetMessage('isiZulu')
-    //     await message.getGreetMessage('English')
+       
+        await HowManyAdded.addNewUserToDatabase('Lulama')
+        await HowManyAdded.addNewUserToDatabase('Zola')
+        await HowManyAdded.addNewUserToDatabase('Xhanti')
 
-    //     var greetMe = await message.findTotalCounter()
+        var addNames = await HowManyAdded.findTotalCounter()
 
-    //     assert.equal(greetMe)
-    // })
+        assert.equal(3, addNames)
+    })
+
+    it('it should be able to add an increment individual counter', async function () {
+        let addIndividual = greeted(pool)
+
+       
+         await addIndividual.addNewUserToDatabase('Lulama')
+         await addIndividual.addNewUserToDatabase('Lulama')
+
+         await addIndividual.addNewUserToDatabase('Zola')
+         await addIndividual.addNewUserToDatabase('Xhanti')
+
+        var addName = await addIndividual.updateUserCounter('Lulama')
+
+        assert.equal(2, addName)
+    })
+
+    it('it should be able to return the number of people greeted to the database', async function () {
+        let addTotal = greeted(pool)
+
+       
+        await addTotal.addNewUserToDatabase('Lulama')
+        await addTotal.addNewUserToDatabase('Zola')
+        await addTotal.addNewUserToDatabase('Xhanti')
+        await addTotal.addNewUserToDatabase('Lunga')
+        
+        var Totalofnames = await addTotal.findTotalCounter()
+        
+        assert.equal(4, Totalofnames)
+    })
+
+
+
+    it('it should be able to greet in isiXhosa', async function () {
+        let message = greeted(pool)
+
+       
+        // await message.getGreetMessage('isiZulu')
+        // await message.getGreetMessage('English')
+
+        assert.equal('Molo, Lulama', await message.getGreetMessage('Lulama', 'isiXhosa'))
+
+    })
+
+    it('it should be able to greet in English', async function () {
+        let message = greeted(pool)
+
+       
+        // await message.getGreetMessage('isiZulu')
+        await message.getGreetMessage('English')
+
+        assert.equal('Hello, Lulama', await message.getGreetMessage('Lulama', 'English'))
+
+    })
+
+    it('it should be able to greet in isiZulu', async function () {
+        let message = greeted(pool)
+
+       
+        await message.getGreetMessage('isiZulu')
+
+        assert.equal('Sawubona, Lulama', await message.getGreetMessage('Lulama', 'isiZulu'))
+
+    })
+
+
 
     after(function () {
         pool.end();
