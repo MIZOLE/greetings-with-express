@@ -5,7 +5,7 @@ const pg = require("pg");
 const Pool = pg.Pool;
 
 // const connectionString = process.env.DATABASE_URL || 'postgresql://codex123@localhost:5432/user_on';
-const connectionString = process.env.DATABASE_URL || 'postgresql://codex123:codex123@localhost:5432/user_on';
+const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:codex123@localhost:5432/user_on';
 
 
 const pool = new Pool({
