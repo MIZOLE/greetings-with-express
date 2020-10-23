@@ -25,13 +25,11 @@ describe('The user_on database', function () {
         // the Factory Function is called greet
         let nameGreeted = greeted(pool);
 
-        await nameGreeted.greetWorkflow('Lulama')
-        //    await namesGreeted.checkIfNameExist('Zola')
-        //  await namesGreeted.checkIfNameExist('Lunga')
+        await nameGreeted.addNewUserToDatabase('Lulama')
+       
+        var names = await nameGreeted.findTotalCounter()
 
-        var names = await nameGreeted.findUsers('Lulama')
-
-        assert.equal(names.rows)
+        assert.equal(1, names)
     });
 
     it('it should be able to delete all the user from the data base', async function () {
