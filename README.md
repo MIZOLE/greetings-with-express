@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/MIZOLE/greetings-with-express.svg?branch=master)](https://travis-ci.org/MIZOLE/greetings-with-express)
