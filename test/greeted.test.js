@@ -20,18 +20,7 @@ describe('The user_on database', function () {
         // await pool.query("delete from how_many_times;");
     });
 
-    it('should check if the name exist', async function () {
-
-        // the Factory Function is called greet
-        let nameGreeted = greeted(pool);
-
-        await nameGreeted.addNewUserToDatabase('Lulama')
-       
-        var names = await nameGreeted.findTotalCounter()
-
-        assert.equal(1, names)
-    });
-
+    
     it('it should be able to delete all the user from the data base', async function () {
 
         let counted = greeted(pool)
