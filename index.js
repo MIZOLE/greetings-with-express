@@ -13,7 +13,7 @@ const connectionString = process.env.DATABASE_URL || 'postgresql://codex123:code
 
 const pool = new Pool({
   connectionString,
-  ssl: false
+  // ssl: false
 });
 
 
