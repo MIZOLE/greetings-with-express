@@ -29,7 +29,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-
 app.get('/addFlash', function (req, res) {
   req.flash('info', 'Flash Message Added');
   res.redirect('/');
