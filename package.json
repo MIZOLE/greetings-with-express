@@ -16,7 +16,9 @@
     "express-session": "^1.17.1",
     "pg": "^8.4.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^8.2.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MIZOLE/greetings-with-express.git"
