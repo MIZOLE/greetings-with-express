@@ -29,7 +29,7 @@ describe('The user_on database', function () {
         //    await namesGreeted.checkIfNameExist('Zola')
         //  await namesGreeted.checkIfNameExist('Lunga')
 
-        var names = await nameGreeted.findUsers()
+        var names = await nameGreeted.findUsers('Lulama')
 
         assert.equal(names.rows)
     });
